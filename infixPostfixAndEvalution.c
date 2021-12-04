@@ -10,9 +10,9 @@ int top = -1;
 int stackInt[MAX];
 int topInt = -1;
 
-int isStackFull(){
-    return top == MAX-1;
-}
+// ---------------------------------------
+// All operations for Integer type stack
+// ---------------------------------------
 
 int isStackFullInt(){
     return topInt == MAX-1;
@@ -59,6 +59,14 @@ int topsInt(){
 
 }
 
+// ---------------------------------------
+// All operations for Char type stack
+// ---------------------------------------
+
+int isStackFull(){
+    return top == MAX-1;
+}
+
 int size(){
     return top+1;
 }
@@ -100,6 +108,11 @@ char tops(){
 
 }
 
+// ----------------------------------------------------------------------------------
+// Logic for Ifix -> postfix, evaluation of postfix and their helper functions
+// ----------------------------------------------------------------------------------
+
+/* Conversion of infix to postfix */
 int precedence(char character){
 
     switch(character){
@@ -200,6 +213,7 @@ void infixToPostfix(char infix_exp[], char postfix_exp[])
 
 }
 
+/* Evaluation of postfix expression */
 int performOperation(char operator, int a, int b){
 
     switch(operator){
@@ -244,6 +258,10 @@ int evaluate(char postfix[]){
     return topsInt();
 
 }
+
+// ------------------------------------
+// main function
+// ------------------------------------
 
 int main(){
 
