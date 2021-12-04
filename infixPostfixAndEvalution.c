@@ -248,7 +248,7 @@ int evaluate(char postfix[]){
 int main(){
 
     int ans;
-    char infix[MAX], postfix[MAX] = "ab*cd*+e-";
+    char infix[MAX], postfix[MAX];
 	printf("Enter the infix expression : \n");
     scanf(" %s", infix);
     infixToPostfix(infix,postfix);          
