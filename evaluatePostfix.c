@@ -5,10 +5,10 @@
 #include <math.h>
 #define MAX 50
 
-int stack[MAX];
+int stackInt[MAX];
 int topInt = -1;
 
-int isStackFull(){
+int isStackFullInt(){
     return topInt == MAX-1;
 }
 
@@ -22,12 +22,12 @@ int isEmptyInt(){
 
 void pushInt(int data){
 
-    if(isStackFull()){
-        printf("Stack is full");
+    if(isStackFullInt()){
+        printf("stackInt is full");
         return;
     }
 
-    stack[++topInt] = data;
+    stackInt[++topInt] = data;
 
     return;
 }
@@ -35,21 +35,21 @@ void pushInt(int data){
 int popInt(){
 
     if(isEmptyInt()){
-        printf("Stack is empty");
+        printf("stackInt is empty");
         return '!';
     }
 
-    return stack[topInt--];
+    return stackInt[topInt--];
 
 }
 
 int topsInt(){
     if(isEmptyInt()){
-        printf("Stack is empty");
+        printf("stackInt is empty");
         return '!';
     }
 
-    return stack[topInt];
+    return stackInt[topInt];
 
 }
 

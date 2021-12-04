@@ -2,14 +2,60 @@
 #include<ctype.h>
 #include<string.h>
 #include<stdlib.h>
+#include <math.h>
 #define MAX 50
 
 char stack[MAX];
 int top = -1;
+int stackInt[MAX];
+int topInt = -1;
 
 int isStackFull(){
-
     return top == MAX-1;
+}
+
+int isStackFullInt(){
+    return topInt == MAX-1;
+}
+
+int sizeInt(){
+    return topInt+1;
+}
+
+int isEmptyInt(){
+    return topInt == -1;
+}
+
+void pushInt(int data){
+
+    if(isStackFullInt()){
+        printf("stackInt is full");
+        return;
+    }
+
+    stackInt[++topInt] = data;
+
+    return;
+}
+
+int popInt(){
+
+    if(isEmptyInt()){
+        printf("stackInt is empty");
+        return '!';
+    }
+
+    return stackInt[topInt--];
+
+}
+
+int topsInt(){
+    if(isEmptyInt()){
+        printf("stackInt is empty");
+        return '!';
+    }
+
+    return stackInt[topInt];
 
 }
 
@@ -154,16 +200,63 @@ void infixToPostfix(char infix_exp[], char postfix_exp[])
 
 }
 
+int performOperation(char operator, int a, int b){
+
+    switch(operator){
+        case '+': 
+            return a+b;
+        case '-': 
+            return a-b;
+        case '*':
+             return a*b;
+        case '/':  
+            return a/b;
+        case '^':
+            return pow(a , b);
+    }
+
+    return -1;
+
+}
+
+int evaluate(char postfix[]){
+    int len = strlen(postfix);
+    int operand1;
+    int operand2;
+    int result;
+
+    int i = 0;
+
+	for(i = 0; i < len; i++){
+		if(isalpha(postfix[i])){
+			printf("Enter the value of %c : ", postfix[i]);
+			int x;
+			scanf("%d", &x);
+			pushInt(x);
+		}else if(is_operator(postfix[i])){
+			operand2 = popInt();
+            operand1 = popInt();
+            result = performOperation(postfix[i], operand1, operand2);
+            pushInt(result);
+		}
+	}
+
+    return topsInt();
+
+}
+
 int main(){
 
     int ans;
-    char infix[MAX], postfix[MAX];
-
+    char infix[MAX], postfix[MAX] = "ab*cd*+e-";
+	printf("Enter the infix expression : \n");
     scanf(" %s", infix);
     infixToPostfix(infix,postfix);          
     printf("Postfix Expression: ");
     printf("%s",postfix);
     printf("\n");
+	ans = evaluate(postfix);
+	printf("The postfix expression evaluates to : %d\n", ans);
 
     return 0;
 }
